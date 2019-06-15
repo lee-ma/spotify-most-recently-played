@@ -69,7 +69,7 @@ app.get("/spotifyTrack", function(req,res) {
     
     axios.get(encodeURI(searchUrl), searchConfig)
     .then(function(response) {
-      res.send(response.data.tracks.items);
+      res.send(JSON.stringify(response.data.tracks.items[0]));
     })
     .catch(function(error) {
       console.log(error);
