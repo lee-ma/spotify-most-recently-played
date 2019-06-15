@@ -44,7 +44,7 @@ app.get("/spotifyLink", function(req,res) {
   const config = {
     headers: {
       'Authorization': `Basic ${auth}`,
-      'Content-Type': 'application/x-www-form-url-encoded'
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
   }
 
