@@ -2,6 +2,7 @@ var express = require('express');
 var axios = require('axios');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var querystring = require('querystring');
 var port = process.env.PORT || 3000;
 
 var app = express();
@@ -52,7 +53,7 @@ app.get("/spotifyLink", function(req,res) {
     grant_type: 'client_credentials'
   }
 
-  axios.post('https://accounts.spotify.com/api/token', body, config)
+  axios.post('https://accounts.spotify.com/api/token', querystring.stringify(body), config)
   .then(function(response) {
     res.send(response);
   })
