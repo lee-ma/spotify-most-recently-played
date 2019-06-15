@@ -53,16 +53,30 @@ app.get("/spotifyLink", function(req,res) {
     grant_type: 'client_credentials'
   }
 
+
   axios.post('https://accounts.spotify.com/api/token', querystring.stringify(body), config)
-  .then(function(response) {
-    res.send(response);
+  .then(function(resp) {
+    const searchHeader = resp.data.access_token
+
+    const searchConfig = {
+      headers: {
+        'Authorization': `Bearer ${searchHeader}`
+      }
+    }
+  
+    var searchUrl = 'https://api.spotify.com/v1/search?q=track:"' + title + '"%20artist:"' + artist + +'"%20album:"' + album + '"&type=track&limit=1';
+    
+    axios.get(searchUrl, config)
+    .then(function(response) {
+      res.send(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   })
   .catch(function(error) {
     console.log(error);
   });
-  
-  // axios.get('https://api.spotify.com/v1/search?q=track:"' + title + '"%20artist:"' + artist + +'"%20album:"' + album + '"&type=track&limit=1')
-
 });
 
 app.listen(port, function() {
