@@ -25,7 +25,7 @@ app.get("/recentlyPlayed", function(req, res) {
 
   axios.get(process.env.LASTFM_URL)
   .then(function(response) {
-    data = response.data.recenttracks.track;
+    data = response.data.recenttracks.track[0];
     res.send(data);
   }).catch(function(error) {
     console.log(error);
@@ -33,7 +33,7 @@ app.get("/recentlyPlayed", function(req, res) {
 });
 
 
-app.get("/spotifyLink", function(req,res) {
+app.get("/spotifyTrack", function(req,res) {
   var title = req.query.title;
   var artist = req.query.artist;
   var album = req.query.album;
@@ -64,11 +64,13 @@ app.get("/spotifyLink", function(req,res) {
       }
     }
   
-    var searchUrl = 'https://api.spotify.com/v1/search?q=track:"' + title + '"%20artist:"' + artist + +'"%20album:"' + album + '"&type=track&limit=1';
+    var gateway = 'https://api.spotify.com/v1/search?'
+    var query= `q=track:"${title}" artist:"${artist}" album:"${album}"&type=track&limit=1`;
+    var searchUrl = gateway + query;
     
-    axios.get(searchUrl, config)
+    axios.get(encodeURI(searchUrl), searchConfig)
     .then(function(response) {
-      res.send(response);
+      res.send(response.data.tracks.items[0]);
     })
     .catch(function(error) {
       console.log(error);
