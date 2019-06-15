@@ -36,6 +36,7 @@ app.get("/recentlyPlayed", function(req, res) {
 app.get("/spotifyTrack", function(req,res) {
   var title = req.query.title;
   var artist = req.query.artist;
+  var album = req.query.album;
 
   var stringToEncode = process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET;
 
@@ -64,7 +65,7 @@ app.get("/spotifyTrack", function(req,res) {
     }
   
     var gateway = 'https://api.spotify.com/v1/search?'
-    var query= `q=track:"${title}" artist:"${artist}"&type=track&limit=1`;
+    var query= `q=track:"${title}" artist:"${artist}" album:"${album}"&type=track&limit=1`;
     var searchUrl = gateway + query;
     
     axios.get(encodeURI(searchUrl), searchConfig)
