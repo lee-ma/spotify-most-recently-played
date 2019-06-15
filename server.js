@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: "http://localhost:8000"
+  origin: "http://www.leema.ca"
 }));
 
 app.get("/", function(req,res) {
