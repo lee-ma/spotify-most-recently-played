@@ -5,8 +5,6 @@ var bodyParser = require('body-parser');
 var querystring = require('querystring');
 var port = process.env.PORT || 3000;
 
-var utils = require('./util');
-
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
