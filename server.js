@@ -15,10 +15,12 @@ app.get("/", function(req,res) {
 
 app.get("/recentlyPlayed", function(req, res) {
   axios.get(process.env.LASTFM_URL)
-  .then(response => {
-    res.send(response);
-  });
-})
+  .then(function(response) {
+    res.send(response.data);
+  }).catch(function(error) {
+    console.log(error);
+  })
+});
 
 app.listen(port, function() {
   console.log("Running on port" + port);
