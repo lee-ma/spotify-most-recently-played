@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: process.env.CORS_URL
+  origin: process.env.CORS_ORIGIN
 }));
 
 app.get("/", function(req,res) {
