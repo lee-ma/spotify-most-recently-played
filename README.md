@@ -2,6 +2,12 @@
 
 This is a small express API that you can use to get your currently playing or most recently played song on Spotify without having to authenticate with Spotify OAuth. Currently, Spotify requires an OAuth login to occur, and then they have a public endpoint at `/me` which will get the authenticated user's information. If you only want your data, you'll have to continually ping with a websocket or timeout and refresh a login token. Or you can scrobble your data with lastFM, and use the Spotify search API to get spotify meta data, which is what this code does.
 
+## Endpoints
+
+`/recentlyPlayed`: This will return just the data about the most recent or current track played on spotify for the lastFM account associated with the spotify account that is being scrobbled.
+
+`/spotifyTrack`: The parameters this accepts as a GET params is `title` and `artist`. This will get the actual spotify metadata including album art and spotify url.
+
 ## Getting Started
 
 You will need to set up a lastFM account and an API key, and enable Spotify Scrobbling in your user account settings from lastFM. You will need to set up 4 environment variables and API keys from lastFM and Spotify.
